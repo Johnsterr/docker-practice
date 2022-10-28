@@ -1,0 +1,84 @@
+johnsterr@RYZEN7-5800X:/mnt/d/Working/Projects/Netology/docker-practice$ docker pull busybox
+Using default tag: latest
+<3>init: (1831) ERROR: UtilConnectToInteropServer:307: connect failed 2
+latest: Pulling from library/busybox
+22b70bddd3ac: Pull complete 
+Digest: sha256:6bdd92bf5240be1b5f3bf71324f5e371fe59f0e153b27fa1f1620f78ba16963c
+Status: Downloaded newer image for busybox:latest
+docker.io/library/busybox:latest
+johnsterr@RYZEN7-5800X:/mnt/d/Working/Projects/Netology/docker-practice$ docker run --name pinger busybox ping netology.ru -c 7
+PING netology.ru (188.114.98.224): 56 data bytes
+64 bytes from 188.114.98.224: seq=0 ttl=37 time=54.905 ms
+64 bytes from 188.114.98.224: seq=1 ttl=37 time=54.984 ms
+64 bytes from 188.114.98.224: seq=2 ttl=37 time=55.097 ms
+64 bytes from 188.114.98.224: seq=3 ttl=37 time=54.831 ms
+64 bytes from 188.114.98.224: seq=4 ttl=37 time=55.188 ms
+64 bytes from 188.114.98.224: seq=5 ttl=37 time=54.680 ms
+64 bytes from 188.114.98.224: seq=6 ttl=37 time=54.789 ms
+
+--- netology.ru ping statistics ---
+7 packets transmitted, 7 packets received, 0% packet loss
+round-trip min/avg/max = 54.680/54.924/55.188 ms
+johnsterr@RYZEN7-5800X:/mnt/d/Working/Projects/Netology/docker-practice$ docker ps -a
+CONTAINER ID   IMAGE               COMMAND                  CREATED             STATUS                         PORTS     NAMES
+949ef157c138   busybox             "ping netology.ru -c…"   19 minutes ago      Exited (0) 19 minutes ago                pinger
+e91e95f20f46   docker101tutorial   "/docker-entrypoint.…"   50 minutes ago      Exited (0) 45 minutes ago                docker-tutorial
+7fd9a0275ec7   alpine/git          "git clone https://g…"   About an hour ago   Exited (0) About an hour ago             repo
+johnsterr@RYZEN7-5800X:/mnt/d/Working/Projects/Netology/docker-practice$ docker logs pinger
+PING netology.ru (188.114.98.224): 56 data bytes
+64 bytes from 188.114.98.224: seq=0 ttl=37 time=54.905 ms
+64 bytes from 188.114.98.224: seq=1 ttl=37 time=54.984 ms
+64 bytes from 188.114.98.224: seq=2 ttl=37 time=55.097 ms
+64 bytes from 188.114.98.224: seq=3 ttl=37 time=54.831 ms
+64 bytes from 188.114.98.224: seq=4 ttl=37 time=55.188 ms
+64 bytes from 188.114.98.224: seq=5 ttl=37 time=54.680 ms
+64 bytes from 188.114.98.224: seq=6 ttl=37 time=54.789 ms
+
+--- netology.ru ping statistics ---
+7 packets transmitted, 7 packets received, 0% packet loss
+round-trip min/avg/max = 54.680/54.924/55.188 ms
+johnsterr@RYZEN7-5800X:/mnt/d/Working/Projects/Netology/docker-practice$ docker start pinger
+pinger
+johnsterr@RYZEN7-5800X:/mnt/d/Working/Projects/Netology/docker-practice$ docker ps -a
+CONTAINER ID   IMAGE               COMMAND                  CREATED             STATUS                         PORTS     NAMES
+949ef157c138   busybox             "ping netology.ru -c…"   37 minutes ago      Up 6 seconds                             pinger
+e91e95f20f46   docker101tutorial   "/docker-entrypoint.…"   About an hour ago   Exited (0) About an hour ago             docker-tutorial
+7fd9a0275ec7   alpine/git          "git clone https://g…"   About an hour ago   Exited (0) About an hour ago             repo
+johnsterr@RYZEN7-5800X:/mnt/d/Working/Projects/Netology/docker-practice$ docker logs pinger
+PING netology.ru (188.114.98.224): 56 data bytes
+64 bytes from 188.114.98.224: seq=0 ttl=37 time=54.905 ms
+64 bytes from 188.114.98.224: seq=1 ttl=37 time=54.984 ms
+64 bytes from 188.114.98.224: seq=2 ttl=37 time=55.097 ms
+64 bytes from 188.114.98.224: seq=3 ttl=37 time=54.831 ms
+64 bytes from 188.114.98.224: seq=4 ttl=37 time=55.188 ms
+64 bytes from 188.114.98.224: seq=5 ttl=37 time=54.680 ms
+64 bytes from 188.114.98.224: seq=6 ttl=37 time=54.789 ms
+
+--- netology.ru ping statistics ---
+7 packets transmitted, 7 packets received, 0% packet loss
+round-trip min/avg/max = 54.680/54.924/55.188 ms
+PING netology.ru (188.114.99.234): 56 data bytes
+64 bytes from 188.114.99.234: seq=0 ttl=37 time=45.574 ms
+64 bytes from 188.114.99.234: seq=1 ttl=37 time=45.323 ms
+64 bytes from 188.114.99.234: seq=2 ttl=37 time=45.489 ms
+64 bytes from 188.114.99.234: seq=3 ttl=37 time=46.002 ms
+64 bytes from 188.114.99.234: seq=4 ttl=37 time=45.719 ms
+64 bytes from 188.114.99.234: seq=5 ttl=37 time=45.301 ms
+64 bytes from 188.114.99.234: seq=6 ttl=37 time=45.538 ms
+
+--- netology.ru ping statistics ---
+7 packets transmitted, 7 packets received, 0% packet loss
+round-trip min/avg/max = 45.301/45.563/46.002 ms
+johnsterr@RYZEN7-5800X:/mnt/d/Working/Projects/Netology/docker-practice$ docker rm pinger
+pinger
+johnsterr@RYZEN7-5800X:/mnt/d/Working/Projects/Netology/docker-practice$ docker ps -a
+CONTAINER ID   IMAGE               COMMAND                  CREATED             STATUS                         PORTS     NAMES
+e91e95f20f46   docker101tutorial   "/docker-entrypoint.…"   About an hour ago   Exited (0) About an hour ago             docker-tutorial
+7fd9a0275ec7   alpine/git          "git clone https://g…"   About an hour ago   Exited (0) About an hour ago             repo
+johnsterr@RYZEN7-5800X:/mnt/d/Working/Projects/Netology/docker-practice$ docker rmi busybox
+Untagged: busybox:latest
+Untagged: busybox@sha256:6bdd92bf5240be1b5f3bf71324f5e371fe59f0e153b27fa1f1620f78ba16963c
+Deleted: sha256:bc01a3326866eedd68525a4d2d91d2cf86f9893db054601d6be524d5c9d03981
+Deleted: sha256:0438ade5aeea533b00cd75095bec75fbc2b307bace4c89bb39b75d428637bcd8
+
+
